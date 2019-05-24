@@ -1,4 +1,4 @@
-/* Trabalho de Fundamentos de Algoritimos - Informática/UEM 2019
+/* Trabalho de Fundamentos de Algoritmos - Informática/UEM 2019
    Um programa feito em C para cadastro de Clientes.
    Funções: Cadastro, Remoção, Listagem e Remoção. 
    By: Filipe Moreno and Gabriel Galego 

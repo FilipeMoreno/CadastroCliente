@@ -2,7 +2,7 @@
    Um programa feito em C para cadastro de Clientes.
    Funções: Cadastro, Remoção, Listagem e Remoção. 
    By: Filipe Moreno and Gabriel Galego 
-   www.filipemoreno.com.br
+   www.filipemoreno.me
 */
 
 // INICIO DAS BIBLIOTECAS

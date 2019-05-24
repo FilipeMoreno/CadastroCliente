@@ -1,6 +1,12 @@
+// INICIO DAS BIBLIOTECAS
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+// FIM DAS BIBLIOTECAS
+
+// INICIO DA FUNCAO LIMPAR SCANF
 
 void limpar(void)
 {
@@ -10,8 +16,9 @@ void limpar(void)
     } while (c != '\n' && c != EOF);
 }
 
-int cod;
-cod = 0;
+// FIM DA FUNCAO LIMPAR SCANF
+
+// INICIO DA ESTRUTURA DE CADASTRO
 
 struct cadastro
 {
@@ -34,7 +41,16 @@ struct cadastro
 
 };
 
+// FIM DA ESTRUTURA DE CADASTRO
+
+// INICIO DAS VARIAVEIS GLOBAIS
+
 struct cadastro cliente[100];
+int cod = 0;
+
+// FIM DAS VARIAVEIS GLOBAIS
+
+// INICIO DA FUNÇÃO DE MENU
 
 void menu()
 {
@@ -62,6 +78,10 @@ void menu()
             break;
     }
 }
+
+// FIM DA FUNÇÃO DE MENU
+
+// INICIO DA FUNÇÃO DE CADASTRO
 
 void cadastro()
 {
@@ -124,6 +144,10 @@ void cadastro()
 	menu();
 }
 
+// FIM DA FUNÇÃO DE CADASTRO
+
+// INICIO DA FUNÇÃO DE VISUALIZAR
+
 void visualizar()
 {
     int codigo;
@@ -159,6 +183,10 @@ void visualizar()
     printf("\n");
     menu();
 }
+
+// FIM DA FUNÇÃO DE VISUALIZAR
+
+// INICIO DA FUNÇÃO DE EDITAR
 
 void editar()
 {
@@ -353,6 +381,10 @@ void editar()
     }
 }
 
+// FIM DA FUNÇÃO DE EDITAR
+
+// INICIO DA FUNCAO PRINCIPAL
+
 main()
 {
 
@@ -422,3 +454,4 @@ main()
 	}
 }
 
+// FIM DA FUNCAO PRINCIPAL

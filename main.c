@@ -446,7 +446,7 @@ main()
 			visualizar();
 			break;
 		default:
-			printf("\n");
+            printf("\n");
 			printf(" Ei, parece que voce digitou uma opcao invalida.\n");
 			printf("\n");
 			return main();

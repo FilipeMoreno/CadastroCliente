@@ -37,7 +37,9 @@ struct cadastro
     char numero[60];
     char bairro[200];
     char telefone[60];
-    char nascimento[60];
+    int dia[2];
+    int mes[2];
+    int ano[4];
     char rg[60];
     char cpf[60];
     char sexo[60];
@@ -54,7 +56,8 @@ struct cadastro
 
 struct cadastro cliente[100];
 int cod = 0;
-char senha;
+char usuario[15];
+char senha[12];
 
 // FIM DAS VARIAVEIS GLOBAIS
 
@@ -123,8 +126,8 @@ void cadastro()
 	printf(" Informe o celular do Cliente: ");
 	scanf("%s", &cliente[cod].celular);
 	limpar();
-	printf(" Informe a data de nascimento do Cliente (DD-MM-AAAA): ");
-	scanf("%s", &cliente[cod].nascimento);
+	printf(" Informe a data de nascimento do Cliente (DD/MM/AAAA): ");
+	scanf("%i/%i/%i", &cliente[cod].dia,&cliente[cod].dia,&cliente[cod].dia);
 	limpar();
 	printf(" Informe o sexo do Cliente: ");
 	scanf("%s", &cliente[cod].sexo);
@@ -396,17 +399,17 @@ void editar()
 main()
 {
 
-	int opcao;
+	int opcao, i;
 	struct cadastro cliente[100];
 	
-	printf(" Digite a senha: ");
+	printf(" Informe o usuario: ");
+	scanf("%s", &usuario);
+	limpar();
+	printf(" Informe a senha: ");
 	scanf("%s", &senha);
-	if (senha != "pass")
-	{
-	    printf(" Senha errada.\n");
-	    main();
-	}
-    else{
+	limpar();
+    if (strcmp(usuario, "admin") == 0 && strcmp(senha, "pass") == 0)
+    {
 	    printf("\n");
 	    printf(" === Menu de Opcoes ===\n");
 	    printf("\n");
@@ -468,6 +471,11 @@ main()
 		    	return main();
 		    	break;
 	    }
+    }
+    else
+    {
+        printf(" Senha errada...\n");
+        main();
     }
 }
 

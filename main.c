@@ -54,6 +54,7 @@ struct cadastro
 
 struct cadastro cliente[100];
 int cod = 0;
+char senha;
 
 // FIM DAS VARIAVEIS GLOBAIS
 
@@ -95,57 +96,57 @@ void cadastro()
     cod ++;
 	printf(" ID do Cliente: #%i\n", cod);
 	printf("\n");
-	printf(" Digite o nome do Cliente: ");
+	printf(" Informe o nome do Cliente: ");
 	scanf("%s", &cliente[cod].nome);
 	limpar();
-	printf(" Digite o endereco do Cliente: ");
+	printf(" Informe o endereco do Cliente: ");
 	scanf("%s", &cliente[cod].endereco);
 	limpar();
-    printf(" Digite o municipio do Cliente: ");
-	scanf("%s", &cliente[cod].municipio);
-	limpar();
-    printf(" Digite o bairro do Cliente: ");
+    printf(" Informe o bairro do Cliente: ");
 	scanf("%s", &cliente[cod].bairro);
 	limpar();
-    printf(" Digite o CEP do Cliente: ");
+    printf(" Informe o CEP do Cliente: ");
 	scanf("%s", &cliente[cod].cep);
 	limpar();
-    printf(" Digite o numero da residencia do Cliente: ");
+    printf(" Informe o numero da residencia do Cliente: ");
 	scanf("%s", &cliente[cod].numero);
 	limpar();
-    printf(" Digite o UF do Cliente: ");
+	printf(" Informe o municipio do Cliente: ");
+	scanf("%s", &cliente[cod].municipio);
+	limpar();
+    printf(" Informe o UF do Cliente: ");
 	scanf("%s", &cliente[cod].uf);
 	limpar();
-	printf(" Digite o telefone do Cliente: ");
+	printf(" Informe o telefone do Cliente: ");
 	scanf("%s", &cliente[cod].telefone);
 	limpar();
-	printf(" Digite o celular do Cliente: ");
+	printf(" Informe o celular do Cliente: ");
 	scanf("%s", &cliente[cod].celular);
 	limpar();
-	printf(" Digite a data de nascimento do Cliente (DD-MM-AAAA): ");
+	printf(" Informe a data de nascimento do Cliente (DD-MM-AAAA): ");
 	scanf("%s", &cliente[cod].nascimento);
 	limpar();
-	printf(" Digite o sexo do Cliente: ");
+	printf(" Informe o sexo do Cliente: ");
 	scanf("%s", &cliente[cod].sexo);
 	limpar();
-	printf(" Digite a nacionalidade do Cliente: ");
+	printf(" Informe a nacionalidade do Cliente: ");
 	scanf("%s", &cliente[cod].nacionalidade);
 	limpar();
-	printf(" Digite o RG do Cliente: ");
+	printf(" Informe o RG do Cliente: ");
 	scanf("%s", &cliente[cod].rg);
 	limpar();
-	printf(" Digite o CPF do Cliente: ");
+	printf(" Informe o CPF do Cliente: ");
 	scanf("%s", &cliente[cod].cpf);
 	limpar();
-	printf(" Digite o estado civil do Cliente: ");
+	printf(" Informe o estado civil do Cliente: ");
 	scanf("%s", &cliente[cod].estado_civil);
 	limpar();
-	printf(" Digite o email do Cliente: ");
+	printf(" Informe o email do Cliente: ");
 	scanf("%s", &cliente[cod].email);
 	limpar();
 	sleep(1);
 	printf("\n");
-	printf(" Cadastro concluido!\n");
+	printf(" Cadastro realizado com Sucesso!\n");
     sleep(1);
     printf("\n");
 	menu();
@@ -238,7 +239,7 @@ void editar()
             scanf("%s", &cliente[codigo].nome);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -247,7 +248,7 @@ void editar()
             scanf("%s", &cliente[codigo].endereco);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -256,7 +257,7 @@ void editar()
             scanf("%s", &cliente[codigo].municipio);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -265,7 +266,7 @@ void editar()
             scanf("%s", &cliente[codigo].bairro);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -274,7 +275,7 @@ void editar()
             scanf("%s", &cliente[codigo].cep);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -283,7 +284,7 @@ void editar()
             scanf("%s", &cliente[codigo].numero);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -292,7 +293,7 @@ void editar()
             scanf("%s", &cliente[codigo].uf);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -301,7 +302,7 @@ void editar()
             scanf("%s", &cliente[codigo].telefone);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -310,7 +311,7 @@ void editar()
             scanf("%s", &cliente[codigo].celular);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -319,7 +320,7 @@ void editar()
             scanf("%s", &cliente[codigo].nascimento);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -328,7 +329,7 @@ void editar()
             scanf("%s", &cliente[codigo].sexo);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -337,7 +338,7 @@ void editar()
             scanf("%s", &cliente[codigo].nacionalidade);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -346,7 +347,7 @@ void editar()
             scanf("%s", &cliente[codigo].rg);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -355,7 +356,7 @@ void editar()
             scanf("%s", &cliente[codigo].cpf);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -364,7 +365,7 @@ void editar()
             scanf("%s", &cliente[codigo].estado_civil);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -373,7 +374,7 @@ void editar()
             scanf("%s", &cliente[codigo].email);
             limpar();
             sleep(1);
-            printf(" Alteracao feita com sucesso!\n");
+            printf(" Alteracao realizada com sucesso!\n");
             printf("\n");
             menu();
             break;
@@ -397,68 +398,77 @@ main()
 
 	int opcao;
 	struct cadastro cliente[100];
-
-	printf("\n");
-	printf(" === Menu de Opcoes ===\n");
-	printf("\n");
-	printf(" 1 - Cadastrar um novo Cliente\n");
-	printf(" 2 - Alterar um Cliente\n");
-	printf(" 3 - Excluir um Cliente\n");
-	printf(" 4 - Visualizar um Cliente\n");
-	printf(" 5 - Estatisticas\n");
-	printf("\n");
-	printf(" 0 - Sair\n");
-	printf("\n");
-	printf(" Selecione uma opcao: ");
-	scanf("%i", &opcao);
-	limpar();
-
-	switch (opcao)
+	
+	printf(" Digite a senha: ");
+	scanf("%s", &senha);
+	if (senha != "pass")
 	{
-		case 0:
-            printf("\n");
-            printf(" Finalizando o programa...\n");
-			printf(" Ate mais!\n");
-			break;
-		case 1:
-			printf("\n");
-			printf(" Voce selecionou: 'Cadastrar Novo Cliente'...\n");
-			printf(" Aguarde um segundo...\n");
-			sleep(1);
-			printf("\n");
-			system("@cls||clear");
-			cadastro();
-			break;
-		case 2:
-            printf("\n");
-            printf(" Voce selecionou: 'Alterar Cliente'...\n");
-			printf(" Aguarde um segundo...\n");
-            sleep(1);
-			printf("\n");
-			system("@cls||clear");
-			editar();
-			break;
-		case 3:
-			printf("\n");
-			printf(" Voce selecionou: 'Excluir Cliente'...\n");
-			printf(" Aguarde um segundo...\n");
-			break;
-        case 4:
-			printf("\n");
-			printf(" Voce selecionou: 'Visualizar Cliente'...\n");
-			printf(" Aguarde um segundo...\n");
-            sleep(1);
-			printf("\n");
-			system("@cls||clear");
-			visualizar();
-			break;
-		default:
-            printf("\n");
-			printf(" Ei, parece que voce digitou uma opcao invalida.\n");
-			printf("\n");
-			return main();
-			break;
+	    printf(" Senha errada.\n");
+	    main();
 	}
+    else{
+	    printf("\n");
+	    printf(" === Menu de Opcoes ===\n");
+	    printf("\n");
+	    printf(" 1 - Cadastrar um novo Cliente\n");
+	    printf(" 2 - Alterar um Cliente\n");
+	    printf(" 3 - Excluir um Cliente\n");
+	    printf(" 4 - Visualizar um Cliente\n");
+	    printf(" 5 - Estatisticas\n");
+    	printf("\n");
+	    printf(" 0 - Sair\n");
+    	printf("\n");
+	    printf(" Selecione uma opcao: ");
+    	scanf("%i", &opcao);
+    	limpar();
+
+	    switch (opcao)
+    	{
+	    	case 0:
+             printf("\n");
+              printf(" Finalizando o programa...\n");
+		    	printf(" Ate mais!\n");
+		    	break;
+	    	case 1:
+		    	printf("\n");
+		    	printf(" Voce selecionou: 'Cadastrar Novo Cliente'...\n");
+		    	printf(" Aguarde um segundo...\n");
+		    	sleep(1);
+		    	printf("\n");
+		    	system("@cls||clear");
+		    	cadastro();
+		    	break;
+	    	case 2:
+                printf("\n");
+                printf(" Voce selecionou: 'Alterar Cliente'...\n");
+			    printf(" Aguarde um segundo...\n");
+                sleep(1);
+			    printf("\n");
+			    system("@cls||clear");
+			    editar();
+			    break;
+		    case 3:
+			    printf("\n");
+			    printf(" Voce selecionou: 'Excluir Cliente'...\n");
+			    printf(" Aguarde um segundo...\n");
+			    break;
+            case 4:
+			    printf("\n");
+			    printf(" Voce selecionou: 'Visualizar Cliente'...\n");
+			    printf(" Aguarde um segundo...\n");
+                sleep(1);
+		    	printf("\n");
+		    	system("@cls||clear");
+		    	visualizar();
+		    	break;
+	    	default:
+             printf("\n");
+		    	printf(" Ei, parece que voce digitou uma opcao invalida.\n");
+		    	printf("\n");
+		    	return main();
+		    	break;
+	    }
+    }
 }
 
 // FIM DA FUNCAO PRINCIPAL

@@ -1,8 +1,11 @@
-/* Trabalho de Fundamentos de Algoritmos - Informática/UEM 2019
-   Um programa feito em C para cadastro de Clientes.
-   Funções: Cadastro, Remoção, Listagem e Remoção. 
-   By: Filipe Moreno and Gabriel Galego 
+/* Trabalho de Fundamentos de Algoritmos - Informática/UEM 2019.
+   Um programa feito em C para cadastro de Clientes de um Banco com umas funções a mais.
+   Funções: Cadastro, atualização, consulta, listagem, remoção, estatísticas, saque, deposito.
+   By: Filipe Moreno and Gabriel Galego.
+   PS: Ainda não há salvamento em arquivos.
    www.filipemoreno.me
+   Versão: 1.8
+   Atualizado em: 31/05 - 02:00 AM
 */
 
 // INICIO DAS BIBLIOTECAS
@@ -10,8 +13,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 // FIM DAS BIBLIOTECAS
+
+//INÍCIO DA FUNÇÃO DELAY
+
+void delay(int number_of_seconds)
+{
+    clock_t start_time = clock();
+    while (clock() < start_time + number_of_seconds);
+}
+
+// FIM DA FUNÇÃO DELAY
 
 // INICIO DA FUNCAO LIMPAR SCANF
 
@@ -32,21 +46,21 @@ struct cadastro
     char nome[200];
     char endereco[200];
     char municipio[200];
-    char uf[2];
-    char cep[60];
-    char numero[60];
+    char uf[200];
+    char cep[200];
+    char numero[200];
     char bairro[200];
-    char telefone[60];
-    int dia[2];
-    int mes[2];
-    int ano[4];
-    char rg[60];
-    char cpf[60];
-    char sexo[60];
-    char estado_civil[60];
-    char email[60];
-    char nacionalidade[60];
-    char celular[60];
+    char telefone[200];
+    char nascimento[200];
+    char rg[200];
+    char cpf[200];
+    char sexo[200];
+    char estado_civil[200];
+    char email[200];
+    char nacionalidade[200];
+    char celular[200];
+    float dinheiro;
+    int nconta;
 
 };
 
@@ -55,9 +69,8 @@ struct cadastro
 // INICIO DAS VARIAVEIS GLOBAIS
 
 struct cadastro cliente[100];
-int cod = 0;
-char usuario[15];
-char senha[12];
+char usuario[15], senha[15];
+int qtdcliente = 0;
 
 // FIM DAS VARIAVEIS GLOBAIS
 
@@ -65,8 +78,8 @@ char senha[12];
 
 void menu()
 {
-    int opcao_menu;
-    printf(" Realizar outra operacao?\n");
+	int opcao_menu;
+    printf(" Voce deseja realizar outra operacao?\n");
     printf(" 1 - Sim\n");
     printf(" 2 - Nao\n");
     printf(" Digite uma opcao: ");
@@ -76,7 +89,7 @@ void menu()
     {
         case 1:
 			system("@cls||clear");
-            return main();
+            escolher();
             break;
         case 2:
             printf("\n");
@@ -84,8 +97,8 @@ void menu()
 			printf(" Ate mais!\n");
 			break;
         default:
-            printf(" Ei, digite uma opcao valida!");
-            return menu();
+            printf(" Ei, digite uma opcao valida!\n");
+            menu();
             break;
     }
 }
@@ -96,61 +109,50 @@ void menu()
 
 void cadastro()
 {
-    cod ++;
-	printf(" ID do Cliente: #%i\n", cod);
+	qtdcliente++;
+	printf("\n");
+	printf(" =======--- Cadastrando Cliente ---======= \n");
 	printf("\n");
 	printf(" Informe o nome do Cliente: ");
-	scanf("%s", &cliente[cod].nome);
-	limpar();
+	fgets(cliente[qtdcliente].nome, 200, stdin);
 	printf(" Informe o endereco do Cliente: ");
-	scanf("%s", &cliente[cod].endereco);
-	limpar();
+	fgets(cliente[qtdcliente].endereco, 200, stdin);
     printf(" Informe o bairro do Cliente: ");
-	scanf("%s", &cliente[cod].bairro);
-	limpar();
+	fgets(cliente[qtdcliente].bairro, 200, stdin);
     printf(" Informe o CEP do Cliente: ");
-	scanf("%s", &cliente[cod].cep);
-	limpar();
+    fgets(cliente[qtdcliente].cep, 200, stdin);
     printf(" Informe o numero da residencia do Cliente: ");
-	scanf("%s", &cliente[cod].numero);
-	limpar();
+	fgets(cliente[qtdcliente].numero, 200, stdin);
 	printf(" Informe o municipio do Cliente: ");
-	scanf("%s", &cliente[cod].municipio);
-	limpar();
+	fgets(cliente[qtdcliente].municipio, 200, stdin);
     printf(" Informe o UF do Cliente: ");
-	scanf("%s", &cliente[cod].uf);
-	limpar();
+    fgets(cliente[qtdcliente].uf, 200, stdin);
 	printf(" Informe o telefone do Cliente: ");
-	scanf("%s", &cliente[cod].telefone);
-	limpar();
+	fgets(cliente[qtdcliente].telefone, 200, stdin);
 	printf(" Informe o celular do Cliente: ");
-	scanf("%s", &cliente[cod].celular);
-	limpar();
-	printf(" Informe a data de nascimento do Cliente (DD/MM/AAAA): ");
-	scanf("%i/%i/%i", &cliente[cod].dia,&cliente[cod].dia,&cliente[cod].dia);
-	limpar();
+	fgets(cliente[qtdcliente].celular, 200, stdin);
+	printf(" Informe a data de nascimento do Cliente (DD MM AAAA): ");
+	fgets(cliente[qtdcliente].nascimento, 200, stdin);
 	printf(" Informe o sexo do Cliente: ");
-	scanf("%s", &cliente[cod].sexo);
-	limpar();
+	fgets(cliente[qtdcliente].sexo, 200, stdin);
 	printf(" Informe a nacionalidade do Cliente: ");
-	scanf("%s", &cliente[cod].nacionalidade);
-	limpar();
+	fgets(cliente[qtdcliente].nacionalidade, 200, stdin);
 	printf(" Informe o RG do Cliente: ");
-	scanf("%s", &cliente[cod].rg);
-	limpar();
+	fgets(cliente[qtdcliente].rg, 200, stdin);
 	printf(" Informe o CPF do Cliente: ");
-	scanf("%s", &cliente[cod].cpf);
-	limpar();
+	fgets(cliente[qtdcliente].cpf, 200, stdin);
 	printf(" Informe o estado civil do Cliente: ");
-	scanf("%s", &cliente[cod].estado_civil);
-	limpar();
+	fgets(cliente[qtdcliente].estado_civil, 200, stdin);
 	printf(" Informe o email do Cliente: ");
-	scanf("%s", &cliente[cod].email);
-	limpar();
-	sleep(1);
+	fgets(cliente[qtdcliente].email, 200, stdin);
+	cliente[qtdcliente].dinheiro = 0;
+	delay(500);
 	printf("\n");
 	printf(" Cadastro realizado com Sucesso!\n");
-    sleep(1);
+	srand(time(NULL));
+	cliente[qtdcliente].nconta = rand() % 100000;
+	printf(" Numero da Conta: %i\n", cliente[qtdcliente].nconta);
+    delay(500);
     printf("\n");
 	menu();
 }
@@ -161,38 +163,51 @@ void cadastro()
 
 void visualizar()
 {
-    int codigo;
+    int i = 0;
+    char cpf[20];
+    
+	printf("\n");
+    printf(" Por favor, insira o CPF do cliente: ");
+    fgets(cpf, 20, stdin);
 
-    printf("\n");
-    printf(" Digite o #ID do cliente: ");
-    scanf("%i", &codigo);
-    limpar();
-    if (codigo == 0 || codigo > cod)
-    {
-        printf(" ID: %i nao encontrado.\n", codigo);
-        printf("\n");
-        visualizar();
-    }
-    printf(" Nome: %s\n", cliente[codigo].nome);
-    printf(" Endereco: %s\n", cliente[codigo].endereco);
-    printf(" Municipio: %s\n", cliente[codigo].municipio);
-    printf(" Bairro: %s\n", cliente[codigo].bairro);
-    printf(" CEP: %s\n", cliente[codigo].cep);
-    printf(" Num Residencia: %s\n", cliente[codigo].numero);
-    printf(" UF: %s\n", cliente[codigo].uf);
-	printf(" Telefone: %s\n", cliente[codigo].telefone);
-	printf(" Celular: %s\n", cliente[codigo].celular);
-	printf(" Nascimento: %s\n", cliente[codigo].nascimento);
-	printf(" Sexo: %s\n", cliente[codigo].sexo);
-	printf(" Nacionalidade: %s\n", cliente[codigo].nacionalidade);
-	printf(" RG: %s\n", cliente[codigo].rg);
-	printf(" CPF: %s\n", cliente[codigo].cpf);
-	printf(" Estado Civil: %s\n", cliente[codigo].estado_civil);
-	printf(" Email: %s\n", cliente[codigo].email);
-	printf(" ID do Cliente: #%i\n", cod);
-    sleep(1);
-    printf("\n");
-    menu();
+	while (i <= qtdcliente)
+	{
+    	if (strcmp(cpf, cliente[i].cpf) == 0)
+    	{
+			printf("\n");
+			printf(" =======--- Visualizando Cliente ---======= \n");
+		    printf(" Nome: %s", cliente[i].nome);
+		    printf(" Endereco: %s", cliente[i].endereco);
+		    printf(" Municipio: %s", cliente[i].municipio);
+		    printf(" Bairro: %s", cliente[i].bairro);
+		    printf(" CEP: %s", cliente[i].cep);
+		    printf(" Num Residencia: %s", cliente[i].numero);
+		    printf(" UF: %s", cliente[i].uf);
+		    printf(" Telefone: %s", cliente[i].telefone);
+		    printf(" Celular: %s", cliente[i].celular);
+		    printf(" Nascimento: %s", cliente[i].nascimento);
+		    printf(" Sexo: %s", cliente[i].sexo);
+		    printf(" Nacionalidade: %s", cliente[i].nacionalidade);
+		    printf(" RG: %s", cliente[i].rg);
+		    printf(" CPF: %s", cliente[i].cpf);
+		    printf(" Estado Civil: %s", cliente[i].estado_civil);
+		    printf(" Email: %s", cliente[i].email);
+		    printf(" Saldo: R$ %.2f\n", cliente[i].dinheiro);
+		    printf(" Numero da Conta: %i\n", cliente[i].nconta);
+		    printf(" #ID: %i\n", i);
+		    printf(" =======--- Visualizando Cliente ---======= \n");
+		    printf("\n");
+		    delay(1000);
+		    menu();
+		}
+		else if (i == qtdcliente)
+		{
+			printf("\n");
+			printf(" Erro: Cliente nao encontrado.\n\n");
+			menu();
+		}
+		i++;
+	}
 }
 
 // FIM DA FUNÇÃO DE VISUALIZAR
@@ -201,17 +216,269 @@ void visualizar()
 
 void editar()
 {
-    int opcao, codigo;
-    printf(" Digite o #ID do cliente: ");
-    scanf("%i", &codigo);
-    limpar();
-    if (codigo == 0 || codigo > cod)
-    {
-        printf(" ID: %i nao encontrado.\n", codigo);
-        printf("\n");
-        editar();
+    int i = 0, opcao;
+    char cpf[20];
+
+    printf("\n");
+	printf(" Por favor, insira o CPF do cliente: ");
+    fgets(cpf, 20, stdin);
+    printf("\n");
+
+	while (i <= qtdcliente)
+	{
+    	if (strcmp(cpf, cliente[i].cpf) == 0)
+    	{
+		    printf(" O que deseja alterar?\n");
+		    printf("  1 - Nome\n");
+		    printf("  2 - Endereco\n");
+		    printf("  3 - Municipio\n");
+		    printf("  4 - Bairro\n");
+		    printf("  5 - CEP\n");
+		    printf("  6 - Num Residencia\n");
+		    printf("  7 - UF\n");
+		    printf("  8 - Telefone\n");
+		    printf("  9 - Celular\n");
+		    printf(" 10 - Nascimento\n");
+		    printf(" 11 - Sexo\n");
+		    printf(" 12 - Nacionalidade\n");
+		    printf(" 13 - RG\n");
+		    printf(" 14 - CPF\n");
+		    printf(" 15 - Estado Civil\n");
+		    printf(" 16 - Email\n");
+		    printf(" 17 - Saldo\n");
+		    printf("\n");
+		    printf(" 0 - Voltar ao menu principal\n");
+		    printf("\n");
+		    printf(" Digite uma opcao: ");
+		    scanf("%i", &opcao);
+		    limpar();
+		    switch (opcao)
+		    {
+		        case 1:
+		            printf("\n Informe o novo 'Nome': ");
+		            fgets(cliente[i].nome, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 2:
+		            printf(" Informe o novo 'Endereco': ");
+		            fgets(cliente[i].endereco, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 3:
+		            printf("\n Informe o novo 'Municipio': ");
+		            fgets(cliente[i].municipio, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 4:
+		            printf("\n Informe o novo 'Bairro': ");
+		            fgets(cliente[i].bairro, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 5:
+		            printf("\n Informe o novo 'CEP': ");
+		            fgets(cliente[i].cep, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 6:
+		            printf("\n Informe o novo 'Numero da Residencia': ");
+		            fgets(cliente[i].numero, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 7:
+		            printf("\n Informe a nova 'UF': ");
+		            fgets(cliente[i].uf, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 8:
+		            printf("\n Informe o novo 'Telefone': ");
+		            fgets(cliente[i].telefone, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 9:
+		            printf("\n Informe o novo 'Celular': ");
+		            fgets(cliente[i].celular, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 10:
+		            printf("\n Informe a nova 'Data de Nascimento' (DD/MM/AAAA): ");
+		            fgets(cliente[i].nascimento, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 11:
+		            printf("\n Informe o novo 'Sexo': ");
+		            fgets(cliente[i].sexo, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 12:
+		            printf("\n Informe a nova 'Nacionalidade': ");
+		            fgets(cliente[i].nacionalidade, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 13:
+		            printf("\n Informe o novo 'RG': ");
+		            fgets(cliente[i].rg, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 14:
+		            printf("\n Informe o novo 'CPF': ");
+		            fgets(cliente[i].cpf, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 15:
+		            printf("\n Informe o novo 'Estado Civil': ");
+		            fgets(cliente[i].estado_civil, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 16:
+		            printf("\n Informe o novo 'Email': ");
+		            fgets(cliente[i].email, 200, stdin);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+                case 17:
+		            printf("\n Informe o novo 'Saldo': ");
+		            scanf("%f", &cliente[i].dinheiro);
+		            delay(500);
+		            printf("\n Cadastro atualizado com sucesso!\n");
+		            printf("\n");
+		            delay(500);
+		            menu();
+		            break;
+		        case 0:
+		            escolher();
+		            break;
+		        default:
+		            printf("\n Ei, informe uma opcao valida!\n");
+		            editar();
+		            break;
+			}
+		}
+		else if (i == qtdcliente)
+		{
+			printf(" Erro: Cliente nao encontrado.\n\n");
+			menu();
+		}
+		i++;
     }
-    printf(" O que deseja alterar?\n");
+}
+
+// FIM DA FUNÇÃO DE EDITAR
+
+// INICIO DA FUNÇÃO ESTATÍSTICA
+
+void estatistica()
+{
+    float saldototal = 0;
+    int i;
+
+    for (i=1;i<=qtdcliente; i++)
+    {
+        saldototal += cliente[i].dinheiro;
+    }
+
+    if (qtdcliente == 0)
+    {
+        printf("\n");
+        printf(" =======--- Estatisticas ---======= \n");
+        printf(" Nao existem cliente cadastrado.\n\n");
+        delay(500);
+        menu();
+    }
+    else if (qtdcliente == 1)
+    {
+        printf("\n");
+        printf(" =======--- Estatisticas ---======= \n");
+        printf(" Existe apenas %i usuario cadastrados.\n", qtdcliente);
+        printf(" Existe R$ %.2f depositados no total.\n\n",saldototal);
+        delay(500);
+        menu();
+    }
+    else
+    {
+        printf("\n");
+        printf(" =======--- Estatisticas ---======= \n");
+        printf(" Existem %i usuarios cadastrados.\n", qtdcliente);
+        printf(" Existe R$ %.2f depositados no total.\n\n",saldototal);
+        delay(500);
+        menu();
+    }
+
+}
+
+// FIM DA FUNÇÃO ESTATÍSTICA
+
+// INICIO DA FUNÇÃO LISTAR
+
+void listar()
+{
+    int i, opcao;
+
+    printf("\n");
+    printf(" O que deseja listar?\n");
+    printf("\n");
     printf("  1 - Nome\n");
     printf("  2 - Endereco\n");
     printf("  3 - Municipio\n");
@@ -228,161 +495,288 @@ void editar()
     printf(" 14 - CPF\n");
     printf(" 15 - Estado Civil\n");
     printf(" 16 - Email\n");
+    printf(" 17 - Saldo\n");
     printf("\n");
     printf(" 0 - Voltar ao menu principal\n");
     printf("\n");
     printf(" Digite uma opcao: ");
     scanf("%i", &opcao);
+    printf("\n");
     limpar();
-
     switch (opcao)
     {
         case 1:
-            printf(" Informe o novo 'Nome': ");
-            scanf("%s", &cliente[codigo].nome);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Nome: %s", i, cliente[i].nome);
+                }
+            }
             menu();
             break;
         case 2:
-            printf(" Informe o novo 'Endereco': ");
-            scanf("%s", &cliente[codigo].endereco);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Endereco: %s", i, cliente[i].endereco);
+                }
+            }
             menu();
             break;
         case 3:
-            printf(" Informe o novo 'Municipio': ");
-            scanf("%s", &cliente[codigo].municipio);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Municipio: %s", i, cliente[i].municipio);
+                }
+            }
             menu();
             break;
         case 4:
-            printf(" Informe o novo 'Bairro': ");
-            scanf("%s", &cliente[codigo].bairro);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Bairro: %s", i, cliente[i].bairro);
+                }
+            }
             menu();
             break;
         case 5:
-            printf(" Informe o novo 'CEP': ");
-            scanf("%s", &cliente[codigo].cep);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. CEP: %s", i, cliente[i].cep);
+                }
+            }
             menu();
             break;
         case 6:
-            printf(" Informe o novo 'Numero da Residencia': ");
-            scanf("%s", &cliente[codigo].numero);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Num. Residencia: %s", i, cliente[i].numero);
+                }
+            }
             menu();
             break;
         case 7:
-            printf(" Informe a nova 'UF': ");
-            scanf("%s", &cliente[codigo].uf);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. UF: %s", i, cliente[i].uf);
+                }
+            }
             menu();
             break;
         case 8:
-            printf(" Informe o novo 'Telefone': ");
-            scanf("%s", &cliente[codigo].telefone);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Telefone: %s", i, cliente[i].telefone);
+                }
+            }
             menu();
             break;
         case 9:
-            printf(" Informe o novo 'Celular': ");
-            scanf("%s", &cliente[codigo].celular);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Celular: %s", i, cliente[i].celular);
+                }
+            }
             menu();
             break;
         case 10:
-            printf(" Informe a nova 'Data de Nascimento': ");
-            scanf("%s", &cliente[codigo].nascimento);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Data Nascimento: %s", i, cliente[i].nascimento);
+                }
+            }
             menu();
             break;
         case 11:
-            printf(" Informe o novo 'Sexo': ");
-            scanf("%s", &cliente[codigo].sexo);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Sexo: %s", i, cliente[i].sexo);
+                }
+            }
             menu();
             break;
         case 12:
-            printf(" Informe a nova 'Nacionalidade': ");
-            scanf("%s", &cliente[codigo].nacionalidade);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Nacionalidade: %s", i, cliente[i].nacionalidade);
+                }
+            }
             menu();
             break;
         case 13:
-            printf(" Informe o novo 'RG': ");
-            scanf("%s", &cliente[codigo].rg);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. RG: %s", i, cliente[i].rg);
+                }
+            }
             menu();
             break;
         case 14:
-            printf(" Informe o novo 'CPF': ");
-            scanf("%s", &cliente[codigo].cpf);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. CPF: %s", i, cliente[i].cpf);
+                }
+            }
             menu();
             break;
         case 15:
-            printf(" Informe o novo 'Estado Civil': ");
-            scanf("%s", &cliente[codigo].estado_civil);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Estado Civil: %s", i, cliente[i].estado_civil);
+                }
+            }
             menu();
             break;
         case 16:
-            printf(" Informe o novo 'Email': ");
-            scanf("%s", &cliente[codigo].email);
-            limpar();
-            sleep(1);
-            printf(" Alteracao realizada com sucesso!\n");
-            printf("\n");
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Email: %s", i, cliente[i].email);
+                }
+            }
+            menu();
+            break;
+        case 17:
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Saldo: R$ %.2f", i, cliente[i].dinheiro);
+                }
+            }
+            menu();
+            break;
+        case 18:
+            for (i=1; i <= qtdcliente; i++)
+            {
+                if (qtdcliente == 0)
+                {
+                    printf(" Nao ha registros para listar.\n");
+                    printf("\n");
+                }
+                else
+                {
+                    printf(" %i. Numero da Conta: %i", i, cliente[i].nconta);
+                }
+            }
             menu();
             break;
         case 0:
-            main();
+            escolher();
             break;
         default:
             printf(" Ei, informe uma opcao valida!\n");
@@ -392,89 +786,331 @@ void editar()
     }
 }
 
-// FIM DA FUNÇÃO DE EDITAR
+// FIM DA FUNÇÃO LISTAR
+
+// INICIO DA FUNÇÃO EXCLUIR
+
+void excluir()
+{
+    int i = 0, id, c, x;
+    char cpf[20];
+
+    printf(" Por favor, insira o CPF do cliente: ");
+    fgets(cpf, 20, stdin);
+    
+	while (i <= qtdcliente)
+	{
+    	if (strcmp(cpf, cliente[i].cpf) == 0)
+    	{
+            printf("\n");
+            printf(" Excluindo");
+            for (x=0; x<3; x++)
+            {
+				delay(500);
+				printf(".");
+			}
+            delay(1000);
+            printf("\n");
+            for (c=i; c<qtdcliente; c++)
+            {
+                strcpy(cliente[c].nome, cliente[c+1].nome);
+                strcpy(cliente[c].endereco, cliente[c+1].endereco);
+                strcpy(cliente[c].municipio, cliente[c+1].municipio);
+                strcpy(cliente[c].bairro, cliente[c+1].bairro);
+                strcpy(cliente[c].cep, cliente[c+1].cep);
+                strcpy(cliente[c].numero, cliente[c+1].numero);
+                strcpy(cliente[c].uf, cliente[c+1].uf);
+                strcpy(cliente[c].telefone, cliente[c+1].telefone);
+                strcpy(cliente[c].celular, cliente[c+1].celular);
+                strcpy(cliente[c].nascimento, cliente[c+1].nascimento);
+                strcpy(cliente[c].sexo, cliente[c+1].sexo);
+                strcpy(cliente[c].nacionalidade, cliente[c+1].nacionalidade);
+                strcpy(cliente[c].rg, cliente[c+1].rg);
+                strcpy(cliente[c].cpf, cliente[c+1].cpf);
+                strcpy(cliente[c].estado_civil, cliente[c+1].estado_civil);
+                strcpy(cliente[c].email, cliente[c+1].email);
+                cliente[c+1].dinheiro = cliente[c].dinheiro;
+                cliente[c+1].nconta = cliente[c].nconta;
+        	}
+   		}
+   		else if (i == qtdcliente)
+		{
+			printf("\n");
+			printf(" Erro: Cliente nao encontrado.\n\n");
+			menu();
+		}
+	i++;
+	}
+    qtdcliente--;
+	printf("\n");
+    printf(" Cadastro excluido com sucesso!\n\n");
+    menu();
+}
+
+// FIM DA FUNÇÃO EXCLUIR
+
+// INCIO DA FUNÇÃO DEPOSITO
+
+void deposito()
+{
+    int i = 0;
+    float qtd1 = 0, qtd2 = 0;
+    char cpf[20];
+
+    printf("\n Por favor, insira o CPF do cliente: ");
+    limpar();
+    fgets(cpf, 20, stdin);
+
+	while (i <= qtdcliente)
+	{
+    	if (strcmp(cpf, cliente[i].cpf) == 0)
+    	{
+            printf("\n Insira o valor que deseja depositar: ");
+            scanf("%f", &qtd1);
+            printf(" Para confirmar o deposito, digite o valor novamente:  ");
+            scanf("%f", &qtd2);
+            if (qtd1 == qtd2)
+            {
+                cliente[i].dinheiro += qtd1;
+                delay(1000);
+                printf("\n");
+                printf(" =======--- Deposito ---======= \n");
+                printf(" Deposito realizado com sucesso!\n");
+                printf(" Valor: R$%.2f\n", qtd1);
+                printf(" Saldo em conta: R$%.2f\n", cliente[i].dinheiro);
+                printf(" =======--- Deposito ---======= \n");
+                printf("\n");
+                menu();
+            }
+
+            else
+            {
+                printf("\n");
+                delay(1000);
+                printf(" Erro: Os valores inseridos nao sao iguais\n");
+                deposito();
+            }
+    	}
+    	else if (i == qtdcliente)
+		{
+			printf("\n");
+			delay(1000);
+			printf(" Erro: Cliente nao encontrado.\n");
+			menu();
+		}
+    	i++;
+	}
+}
+
+void saque()
+{
+    int i = 0;
+    float qtd1 = 0, qtd2 = 0;
+    char cpf[20];
+
+    printf("\n Por favor, insira o CPF do cliente: ");
+    fgets(cpf, 20, stdin);
+
+	while (i <= qtdcliente)
+	{
+    	if (strcmp(cpf, cliente[i].cpf) == 0)
+    	{
+            printf("\n Insira o valor que deseja realizar o saque: ");
+            scanf("%f", &qtd1);
+            printf(" Para confirmar o saque, digite o valor novamente:  ");
+            scanf("%f", &qtd2);
+            if (qtd1 == qtd2)
+            {
+                if (cliente[i].dinheiro >= qtd1)
+                {
+                    cliente[i].dinheiro -= qtd1;
+                    delay(1000);
+                    printf("\n");
+                    printf(" =======--- Saque ---======= \n");
+                    printf(" Saque realizado com sucesso!\n");
+                    printf(" Valor: R$2.f\n", qtd1);
+                    printf(" Saldo em conta: R$%.2f\n", cliente[i].dinheiro);
+                	printf(" =======--- Deposito ---======= \n");
+                    printf("\n");
+                    menu();
+                }
+                else
+                {
+                    printf("\n");
+                    delay(1000);
+                    printf(" Erro: O cliente nao possui saldo suficiente.\n");
+                    printf("\n");
+                    menu();
+                }
+            }
+            else
+            {
+                printf("\n");
+                delay(1000);
+                printf(" Os valores inseridos nao sao iguais\n");
+                deposito();
+            }
+    	}
+    	else if (i == qtdcliente)
+		{
+			printf("\n Erro: Cliente nao encontrado.\n\n");
+			menu();
+		}
+    	i++;
+	}
+}
+
+// FIM DA FUNÇAO DEPOSITO
+
+// INICIO DA FUNCAO ESCOLHA
+
+void escolher()
+{
+    int opcao;
+
+	system("color e");
+	printf("\n ========---- Menu ----======== \n");
+	printf("  1 - Cadastrar um novo Cliente\n");
+    printf("  2 - Atualizar cadastro de um Cliente\n");
+    printf("  3 - Excluir cadastro de um Cliente\n");
+	printf("  4 - Visualizar cadastro de um Cliente\n");
+    printf("  5 - Depositar\n");
+    printf("  6 - Sacar\n");
+    printf("  7 - Transferencia\n");
+    printf("  8 - Extrato\n");
+    printf("  9 - Listar informacoes\n");
+	printf(" 10 - Estatisticas\n\n");
+	printf(" 0 - Sair\n\n");
+	printf(" Por favor, selecione uma opcao.\n");
+	printf(" -> ");
+	scanf("%i", &opcao);
+    limpar();
+
+    switch (opcao)
+    {
+        case 0:
+            printf("\n");
+            printf(" Finalizando o programa...\n");
+            printf(" Ate mais!\n");
+            break;
+        case 1:
+            printf("\n");
+            printf(" Voce selecionou: 'Cadastrar novo Cliente'...\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            printf("\n");
+            system("@cls||clear");
+            cadastro();
+            break;
+        case 2:
+            printf("\n");
+            printf(" Voce selecionou: 'Atualizar dados de um Cliente'...\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            printf("\n");
+            system("@cls||clear");
+            editar();
+            break;
+        case 3:
+            printf("\n");
+            printf(" Voce selecionou: 'Excluir cadastro de um Cliente'\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            printf("\n");
+            system("@cls||clear");
+            excluir();
+            break;
+        case 4:
+            printf("\n");
+            printf(" Voce selecionou: 'Visualizar cadastro de um cliente Cliente'\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            printf("\n");
+            system("@cls||clear");
+            visualizar();
+            break;
+        case 5:
+            printf("\n");
+            printf(" Voce selecionou: 'Depositar'\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            system("@cls||clear");
+            deposito();
+            break;
+        case 6:
+            printf("\n");
+            printf(" Voce selecionou: 'Saque'\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            system("@cls||clear");
+            saque();
+            break;
+        case 9:
+            printf("\n");
+            printf(" Voce selecionou: 'Listar Informacoes'\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            system("@cls||clear");
+            listar();
+            break;
+        case 10:
+            printf("\n");
+            printf(" Voce selecionou: 'Estatisticas'\n");
+            printf(" Aguarde um segundo...\n");
+            delay(500);
+            printf("\n");
+            system("@cls||clear");
+            estatistica();
+            break;
+        default:
+            printf("\n");
+            printf(" Ei, parece que voce digitou uma opcao invalida.\n");
+            printf("\n");
+            escolher();
+            break;
+    }
+}
+
+// FIM DA FUNCAO ESCOLHA
 
 // INICIO DA FUNCAO PRINCIPAL
 
 main()
 {
 
-	int opcao, i;
-	struct cadastro cliente[100];
+	int opcao, i, x;
 	
-	printf(" Informe o usuario: ");
+	system("color 2");
+    printf("\n");
+    printf(" Para prosseguir, realize login.\n");
+    printf("\n");
+	printf(" Usuario: ");
 	scanf("%s", &usuario);
 	limpar();
-	printf(" Informe a senha: ");
+	printf(" Senha: ");
 	scanf("%s", &senha);
 	limpar();
+	printf("\n");
+	system("@cls || clear");
+	printf("\n");
+	printf(" Autenticando");
+	for (x=0; x<3; x++)
+	{
+		delay(600);
+		printf(".");
+	}
+	printf("\n");
     if (strcmp(usuario, "admin") == 0 && strcmp(senha, "pass") == 0)
     {
-	    printf("\n");
-	    printf(" === Menu de Opcoes ===\n");
-	    printf("\n");
-	    printf(" 1 - Cadastrar um novo Cliente\n");
-	    printf(" 2 - Alterar um Cliente\n");
-	    printf(" 3 - Excluir um Cliente\n");
-	    printf(" 4 - Visualizar um Cliente\n");
-	    printf(" 5 - Estatisticas\n");
-    	printf("\n");
-	    printf(" 0 - Sair\n");
-    	printf("\n");
-	    printf(" Selecione uma opcao: ");
-    	scanf("%i", &opcao);
-    	limpar();
-
-	    switch (opcao)
-    	{
-	    	case 0:
-             printf("\n");
-              printf(" Finalizando o programa...\n");
-		    	printf(" Ate mais!\n");
-		    	break;
-	    	case 1:
-		    	printf("\n");
-		    	printf(" Voce selecionou: 'Cadastrar Novo Cliente'...\n");
-		    	printf(" Aguarde um segundo...\n");
-		    	sleep(1);
-		    	printf("\n");
-		    	system("@cls||clear");
-		    	cadastro();
-		    	break;
-	    	case 2:
-                printf("\n");
-                printf(" Voce selecionou: 'Alterar Cliente'...\n");
-			    printf(" Aguarde um segundo...\n");
-                sleep(1);
-			    printf("\n");
-			    system("@cls||clear");
-			    editar();
-			    break;
-		    case 3:
-			    printf("\n");
-			    printf(" Voce selecionou: 'Excluir Cliente'...\n");
-			    printf(" Aguarde um segundo...\n");
-			    break;
-            case 4:
-			    printf("\n");
-			    printf(" Voce selecionou: 'Visualizar Cliente'...\n");
-			    printf(" Aguarde um segundo...\n");
-                sleep(1);
-		    	printf("\n");
-		    	system("@cls||clear");
-		    	visualizar();
-		    	break;
-	    	default:
-             printf("\n");
-		    	printf(" Ei, parece que voce digitou uma opcao invalida.\n");
-		    	printf("\n");
-		    	return main();
-		    	break;
-	    }
+	    printf(" Autenticado com sucesso!");
+	    delay(800);
+	    system("@cls||clear");
+	    escolher();
     }
     else
     {
-        printf(" Senha errada...\n");
+        printf("\n");
+        printf(" Usuario e/ou senha errada\n");
         main();
     }
 }

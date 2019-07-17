@@ -1124,7 +1124,7 @@ void escolher()
             system("@cls||clear");
             extrato();
             break;
-        case 9:
+        case 8:
             printf("\n");
             printf(" Voce selecionou: 'Listar Informacoes'\n");
             printf(" Aguarde um segundo...\n");

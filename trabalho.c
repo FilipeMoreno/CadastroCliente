@@ -1156,8 +1156,16 @@ void escolher()
 
 main()
 {
-
 	int opcao, i, x;
+
+	FILE *fp;
+
+    fp = fopen("db.txt", "w+");
+
+    if (fp==NULL)
+    {
+        printf("Erro ao criar arquivo");
+    }
 
     printf("\n");
     printf(" Para prosseguir, realize login.\n");

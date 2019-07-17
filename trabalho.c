@@ -151,6 +151,35 @@ void cadastro()
 	printf(" Numero da Conta: %i\n", cliente[qtdcliente].nconta);
     delay(500);
     printf("\n");
+
+    FILE *fp;
+
+    fp = fopen("db.txt", "a+");
+
+    if (fp==NULL)
+    {
+        printf("Erro ao criar arquivo");
+    }
+
+    fprintf(fp, "CPF %s", cliente[qtdcliente].cpf);
+    fprintf(fp, "%s", cliente[qtdcliente].nome);
+    fprintf(fp, "%s", cliente[qtdcliente].endereco);
+    fprintf(fp, "%s", cliente[qtdcliente].bairro);
+    fprintf(fp, "%s", cliente[qtdcliente].cep);
+    fprintf(fp, "%s", cliente[qtdcliente].numero);
+    fprintf(fp, "%s", cliente[qtdcliente].municipio);
+    fprintf(fp, "%s", cliente[qtdcliente].uf);
+    fprintf(fp, "%s", cliente[qtdcliente].telefone);
+    fprintf(fp, "%s", cliente[qtdcliente].celular);
+    fprintf(fp, "%s", cliente[qtdcliente].nascimento);
+    fprintf(fp, "%s", cliente[qtdcliente].nacionalidade);
+    fprintf(fp, "%s", cliente[qtdcliente].rg);
+    fprintf(fp, "%s", cliente[qtdcliente].estado_civil);
+    fprintf(fp, "%s", cliente[qtdcliente].email);
+    fprintf(fp, "%.2f\n", cliente[qtdcliente].dinheiro);
+    fprintf(fp, "%i\n", cliente[qtdcliente].nconta);
+    fclose(fp);
+
 	menu();
 }
 
@@ -1157,15 +1186,6 @@ void escolher()
 main()
 {
 	int opcao, i, x;
-
-	FILE *fp;
-
-    fp = fopen("db.txt", "w+");
-
-    if (fp==NULL)
-    {
-        printf("Erro ao criar arquivo");
-    }
 
     printf("\n");
     printf(" Para prosseguir, realize login.\n");
